@@ -1,0 +1,229 @@
+!!! 5
+html(lang='en')
+head
+    meta(charset='utf-8')
+    title SSL
+    //
+      <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+      <meta name="author" content="Hakim El Hattab">
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black-translucent')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    link(rel='stylesheet', href='reveal.js/css/reveal.min.css')
+    link#theme(rel='stylesheet', href='reveal.js/css/theme/default.css')
+    //
+       For syntax highlighting 
+    link(rel='stylesheet', href='reveal.js/lib/css/zenburn.css')
+    //
+       If the query includes 'print-pdf', use the PDF print sheet 
+    script
+      document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    //if lt IE 9
+      script(src='reveal.js/lib/js/html5shiv.js')
+  body
+    .reveal
+      //
+         Any section element inside of this container is displayed as a slide 
+      .slides
+        section
+          h1 Introduction to SSL (HTTPS)
+          h3 AKA: What does that padlock on my internets mean
+          p
+            small
+              a(href='http://bjwebb.co.uk') Ben Webb
+              | /
+              a(href='http://twitter.com/bjwebb67') @bjwebb67
+              | /
+              a(href='http://github.com/Bjwebb/') Bjwebb on Github
+          aside.notes This session will be a bit different from the others as I'm covering something that's already used by most internet users, rather than introducing a new cryptography technology. More talk heavy, although there will be some workshop at the end if people are interested.
+        section
+          h1 A note about naming
+          ul
+            li SSL (Secure Socket Layer) is actually the name of older versions. Newer versions are called TLS (Transport Layer Security)
+            li HTTPS refers to SSL/TLS for websites
+            li This talk only covers HTTPS
+            li I will use 'SSL', as it's a common term, and easy to say.
+        section
+          img(src='ssl.png')
+          aside.notes Talking about what it means when your browser looks like this.
+        section
+          img(src='ssl-ev.png')
+          aside.notes Or like this. Difference between those two slides, which I'll get to later.
+        section
+          h2 SSL uses asymmetric encryption
+          br
+          h2.fragment But doesn't seem to require key exchange...
+        section
+          h2 SSL Certificates
+          p Key signing happens for SSL. A signed public key along with identifying information is called a certificate.
+        section
+          h1 Chain of Trust
+          h3 SSL is Hierarchical and Centralised
+        section
+          p A browser contain several root certificates. ......
+        section
+          // fix this name....
+          h1 Website status
+          ul
+            li Secured
+            li Extended Verification
+            li Partly secured
+            li Invalid certificate
+            li Secured with an invalid certificate
+        section
+          h2 Secured
+          img(src='ssl.png')
+          aside.notes Must be in the browser chrome.
+        section
+          h2 Extended Verification
+          img(src='ssl-ev.png')
+          aside.notes Difference in the amount of verification done by certificate authorities. Not necessarily any more 'secure', but you can be more sure it's who they say they are. Costs a lot of money.
+        section
+          // Images for these......
+          h2 Partly secured
+        section
+          h2 Invalid certificate
+          p Not necessarily malicious, but unless you verify by other means, it could be.
+        section
+          h2 Secured with an invalid certificate
+          p Sometimes this is okay to do. Sometimes no worse than not using SSL
+        section
+          h1 Problems with SSL
+          ul
+            li Only happens if you ask for it
+        section
+          h2 Only happens if you ask for it
+          p If you type in 'securesite.com' your browser defaults to insecure HTTP
+          p If you get 
+          p However
+        section
+          h1 Problems with SSL
+          ul
+            li Only happens if you ask for it
+            li Relies on trusting certificate authorities
+        section
+          h2 Problems with trusting certificate authorities
+          p Comodo .............
+        section
+          h1 HTTPS Everywhere
+          a(href='https://www.eff.org/https-everywhere') https://www.eff.org/https-everywhere
+          aside.notes Ensures that you can use SSL anywhere you can
+        section
+          h1 Perspectives
+          a(href='http://perspectives-project.org/') http://perspectives-project.org/
+        section
+          h1 Recap of Tools
+          ul
+            li HTTPS Everywhere
+        section
+          h1 Any Questions?
+          p
+            small
+              a(href='http://bjwebb.co.uk') Ben Webb
+              | /
+              a(href='http://twitter.com/bjwebb67') @bjwebb67
+              | /
+              a(href='http://github.com/Bjwebb/') Bjwebb on Github
+
+
+
+
+        section
+          h1 Evil SSL
+          h3 So you think you know what that padlock means?
+          p
+            small
+              a(href='http://bjwebb.co.uk') Ben Webb
+              | /
+              a(href='http://twitter.com/bjwebb67') @bjwebb67
+              | /
+              a(href='http://github.com/Bjwebb/') Bjwebb on Github
+        section
+          h1 Disclaimer
+          h3 I'm not a professional security researcher
+          aside.notes So I may well get some of this wrong myself!
+        section
+          h2 This is a talk about SSL
+          h1.fragment FALSE
+          aside.notes As I owned up to previously. Will continue to use the term, unless the distinction matters.
+          // X.509 somewhere..... section about SSL certificate fun.....
+        section
+          h2 Versions of SSL/TLS
+          ul
+            li SSL - developed by Netscape
+              ul
+                li 1.0 - Never released
+                li 2.0 - 1995
+                li 3.0 - 1996
+            li TLS - an IETF standard track protocol
+              ul
+                li 1.0 - 1999 (very similar to SSL 3.0) 
+                li 1.1 - 2006
+                li 1.2 - 2008
+            aside.notes TLS 1.0 is very similar to SSL 3.0 - the change in name is due a change in stewardship of the standard, not due to a change in technology.
+        section
+          h2 SSL uses asymmetric encryption
+          h1.fragment True, BUT...
+        section
+          h2 Other Cryptography used in SSL
+          ul
+            li Symmetric Session keys
+            li Hashing Algorithm
+          aside.notes Asymmetric encryption is much more computationally intensive, so we use asymmetric encryption to encrypt a shared secret to use for symmetric encryption.
+        section
+          h2 SSL is secure
+          h1.fragment FALSE
+          aside.notes SSL 2.0 and earlier have serious vulnerabilities. You should avoid using a browser support these. Reason why SSL 3.0 was released only a year after 2.0
+        section
+          h2 Don't use a browser that supports SSL2.0
+          p Not hard any more, SSL 2.0 is disabled in IE 7, Firefox 2, Opera 9.5, Safari and Chrome 
+        section
+          h2 Symmetric Cipher Security
+          img(src='ssl-cipher-security.png')
+          aside.notes Depends on choice of server, so some websites are more secure than others
+        section
+          h2 If I get a padlock, it's secure.
+          h1.fragment FALSE
+          aside.notes Only if it's in the browser chrome. May seem obvious, but has big ramifications for design of seemingly unrelated features, such as browser full screen. 
+        section
+          h2 If I get a padlock, in my browser chrome, it's secure.
+          h1.fragment FALSE
+          aside.notes Malware. Or Nokia.
+        section
+          h2 I only need SSL when I'm sending important information like my login details
+          h1.fragment FALSE
+          aside.notes Session cookies
+        // Forward secrecy?
+        section
+          h2 Any questions?
+          h1.fragment FALSE
+        section
+          h1 Any Questions?
+          p
+            small
+              a(href='http://bjwebb.co.uk') Ben Webb
+              | /
+              a(href='http://twitter.com/bjwebb67') @bjwebb67
+              | /
+              a(href='http://github.com/Bjwebb/') Bjwebb on Github
+    script(src='reveal.js/lib/js/head.min.js')
+    script(src='reveal.js/js/reveal.min.js')
+    script
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+      transition: 'fade', // default/cube/page/concave/zoom/linear/fade/none
+      // Optional libraries used to extend on reveal.js
+      dependencies: [
+      { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'reveal.jsplugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+      ]
+      });
